@@ -17,3 +17,5 @@ A modern, interactive website for Azumi Analytics, a Nairobi-based data consulta
 - Font Awesome
 
 ## File Structure
+
+## live link: https://azumi-analytics.vercel.app/
