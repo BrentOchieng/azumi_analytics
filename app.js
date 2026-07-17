@@ -1,6 +1,6 @@
-const { useState, useEffect, useRef, useCallback } = React;
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
-// ====== UTILITY HOOKS ======
+// ====== CUSTOM HOOKS ======
 function useCounter(target, suffix = '', duration = 2000) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -16,38 +16,57 @@ function useCounter(target, suffix = '', duration = 2000) {
   return count + suffix;
 }
 
-// ====== PARTICLE BACKGROUND ======
-function ParticleBackground() {
+function useInView(ref, options = { threshold: 0.1, triggerOnce: true }) {
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (options.triggerOnce) observer.disconnect();
+        }
+      },
+      { threshold: options.threshold }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, options.threshold, options.triggerOnce]);
+  return isVisible;
+}
+
+// ====== FOOTER PARTICLES ======
+function FooterParticles() {
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    const parent = canvas.parentElement;
+    let width = parent.offsetWidth;
+    let height = parent.offsetHeight;
     canvas.width = width;
     canvas.height = height;
 
     const particles = [];
-    const particleCount = 100;
+    const particleCount = Math.min(50, Math.floor(width / 25));
     const colors = [
-      { r: 27, g: 107, b: 158 },
       { r: 242, g: 153, b: 74 },
+      { r: 27, g: 107, b: 158 },
       { r: 58, g: 139, b: 191 },
-      { r: 15, g: 40, b: 64 }
+      { r: 255, g: 255, b: 255 }
     ];
 
     class Particle {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.size = Math.random() * 4 + 2;
-        this.speedX = (Math.random() - 0.5) * 0.8;
-        this.speedY = (Math.random() - 0.5) * 0.8;
-        this.opacity = Math.random() * 0.3 + 0.4;
+        this.size = Math.random() * 2.5 + 1.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.25 + 0.15;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.pulse = Math.random() * Math.PI * 2;
-        this.pulseSpeed = 0.02 + Math.random() * 0.02;
+        this.pulseSpeed = 0.015 + Math.random() * 0.015;
       }
       update() {
         this.x += this.speedX;
@@ -68,18 +87,14 @@ function ParticleBackground() {
           this.x, this.y, currentSize * 2.5
         );
         gradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity * 1.2})`);
-        gradient.addColorStop(0.5, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity * 0.7})`);
+        gradient.addColorStop(0.5, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity * 0.6})`);
         gradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
         ctx.fillStyle = gradient;
         ctx.fill();
-        ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.3)`;
-        ctx.shadowBlur = 20;
+        ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.1)`;
+        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, currentSize * 0.3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.6})`;
-        ctx.fill();
       }
     }
 
@@ -95,14 +110,14 @@ function ParticleBackground() {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 180) {
+          if (dist < 140) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            const opacity = 0.25 * (1 - dist / 180);
+            const opacity = 0.1 * (1 - dist / 140);
             const color = particles[i].color;
             ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
-            ctx.lineWidth = 1.2;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
@@ -112,15 +127,36 @@ function ParticleBackground() {
     animate();
 
     const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      width = parent.offsetWidth;
+      height = parent.offsetHeight;
       canvas.width = width;
       canvas.height = height;
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  return <canvas ref={canvasRef} className="particle-bg" />;
+  return <canvas ref={canvasRef} className="footer-particle-bg" />;
+}
+
+// ====== ANIMATED SECTION WRAPPER ======
+function AnimatedSection({ children, className = '', delay = 0, isActive = true }) {
+  const ref = useRef(null);
+  const isVisible = useInView(ref);
+
+  // If section is not active (page not visible), keep it hidden
+  if (!isActive) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <div 
+      ref={ref} 
+      className={`fade-up ${isVisible ? 'visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
 }
 
 // ====== HERO SLIDER ======
@@ -177,13 +213,25 @@ function FloatingMetrics() {
 }
 
 // ====== ANIMATED NUMBERS ======
-function AnimatedNumbers() {
+function AnimatedNumbers({ isActive }) {
   return (
     <div className="numbers" id="numbersBand">
-      <div className="number-item"><h3>{useCounter(5)}</h3><p>Years Team Experience</p></div>
-      <div className="number-item"><h3>{useCounter(60)}+</h3><p>Projects Delivered</p></div>
-      <div className="number-item"><h3>{useCounter(20)}+</h3><p>Tools in Our Stack</p></div>
-      <div className="number-item"><h3>{useCounter(15)}+</h3><p>Client Engagements</p></div>
+      <div className="number-item">
+        <h3>{isActive ? useCounter(5) : '0'}</h3>
+        <p>Years Team Experience</p>
+      </div>
+      <div className="number-item">
+        <h3>{isActive ? useCounter(60) + '+' : '0'}</h3>
+        <p>Projects Delivered</p>
+      </div>
+      <div className="number-item">
+        <h3>{isActive ? useCounter(20) + '+' : '0'}</h3>
+        <p>Tools in Our Stack</p>
+      </div>
+      <div className="number-item">
+        <h3>{isActive ? useCounter(15) + '+' : '0'}</h3>
+        <p>Client Engagements</p>
+      </div>
     </div>
   );
 }
@@ -227,6 +275,7 @@ function AIChat() {
   return (
     <div className={`chat-widget ${isOpen ? 'open' : ''}`}>
       <button className="chat-toggle" onClick={() => setIsOpen(!isOpen)}>
+        <span className="pulse-ring"></span>
         <i className="fas fa-comment-dots"></i>
         {!isOpen && <span className="notification-badge">1</span>}
       </button>
@@ -391,7 +440,6 @@ function App() {
 
   return (
     <>
-      <ParticleBackground />
       <AIChat />
 
       <div className="container">
@@ -416,27 +464,31 @@ function App() {
         {/* Home Page */}
         {activePage === 'home' && (
           <section className="page-section active">
-            <div className="hero">
-              <div>
-                <span className="eyebrow"><i className="fas fa-map-pin"></i> Nairobi, Kenya</span>
-                <h1>We Turn Your Data Into Revenue, <span>Efficiency</span> and <span className="company-name">Growth.</span></h1>
-                <p>Helping businesses automate processes, build intelligent dashboards, and deploy practical AI solutions.</p>
-                <div className="hero-buttons">
-                  <button className="btn-primary" onClick={() => navigateTo('services')}>Explore Our Expertise</button>
-                  <button className="btn-outline" onClick={() => navigateTo('contact')}>Book a Demo</button>
+            <AnimatedSection delay={0} isActive={activePage === 'home'}>
+              <div className="hero">
+                <div>
+                  <span className="eyebrow"><i className="fas fa-map-pin"></i> Nairobi, Kenya</span>
+                  <h1>We Turn Your Data Into Revenue, <span>Efficiency</span> and <span className="company-name">Growth.</span></h1>
+                  <p>Helping businesses automate processes, build intelligent dashboards, and deploy practical AI solutions.</p>
+                  <div className="hero-buttons">
+                    <button className="btn-primary" onClick={() => navigateTo('services')}>Explore Our Expertise</button>
+                    <button className="btn-outline" onClick={() => navigateTo('contact')}>Book a Demo</button>
+                  </div>
+                  <div className="trust-badge">
+                    <span className="stars"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></span>
+                    Trusted by startups, NGOs and enterprises.
+                  </div>
                 </div>
-                <div className="trust-badge">
-                  <span className="stars"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></span>
-                  Trusted by startups, NGOs and enterprises.
+                <div className="hero-visual">
+                  <FloatingMetrics />
+                  <HeroSlider />
                 </div>
               </div>
-              <div className="hero-visual">
-                <FloatingMetrics />
-                <HeroSlider />
-              </div>
-            </div>
+            </AnimatedSection>
 
-            <AnimatedNumbers />
+            <AnimatedSection delay={100} isActive={activePage === 'home'}>
+              <AnimatedNumbers isActive={activePage === 'home'} />
+            </AnimatedSection>
 
             <div className="section-head">
               <span className="eyebrow"><i className="fas fa-layer-group"></i> What we do</span>
@@ -445,12 +497,14 @@ function App() {
             </div>
             <div className="expertise-grid-home">
               {expertiseCards.map((card, i) => (
-                <div key={i} className="expertise-card-home" onClick={() => navigateTo('services')}>
-                  <div className="card-icon" style={{ background: card.bg }}><i className={`fas ${card.icon}`}></i></div>
-                  <h4>{card.title}</h4>
-                  <p>{card.desc}</p>
-                  <span className="learn-more">Learn more <i className="fas fa-arrow-right"></i></span>
-                </div>
+                <AnimatedSection key={i} delay={100 + i * 50} isActive={activePage === 'home'}>
+                  <div className="expertise-card-home" onClick={() => navigateTo('services')}>
+                    <div className="card-icon" style={{ background: card.bg }}><i className={`fas ${card.icon}`}></i></div>
+                    <h4>{card.title}</h4>
+                    <p>{card.desc}</p>
+                    <span className="learn-more">Learn more <i className="fas fa-arrow-right"></i></span>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
 
@@ -468,22 +522,26 @@ function App() {
                 { icon: 'fa-lock', title: 'Ethical Practices', desc: 'Strict standards of data integrity and privacy.' },
                 { icon: 'fa-map-marked-alt', title: 'Local Context, Global Standard', desc: 'Comfortable with paper surveys and cloud data lakes.' }
               ].map((item, i) => (
-                <div key={i} className="why-item">
-                  <div className="card-icon"><i className={`fas ${item.icon}`}></i></div>
-                  <h4>{item.title}</h4>
-                  <p>{item.desc}</p>
-                </div>
+                <AnimatedSection key={i} delay={100 + i * 50} isActive={activePage === 'home'}>
+                  <div className="why-item">
+                    <div className="card-icon"><i className={`fas ${item.icon}`}></i></div>
+                    <h4>{item.title}</h4>
+                    <p>{item.desc}</p>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
 
-            <div className="cta-band">
-              <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&h=500&fit=crop&auto=format&q=80" alt="Team" loading="lazy" />
-              <div className="cta-band-content">
-                <h2>Ready to see your data differently with <span className="azumi">Azumi Analytics</span>?</h2>
-                <p>Book a free 30-minute session. No obligation, just a conversation about where your data could take you.</p>
-                <button className="btn-primary" onClick={() => navigateTo('contact')}>Book a Demo</button>
+            <AnimatedSection delay={100} isActive={activePage === 'home'}>
+              <div className="cta-band">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&h=500&fit=crop&auto=format&q=80" alt="Team" loading="lazy" />
+                <div className="cta-band-content">
+                  <h2>Ready to see your data differently with <span className="azumi">Azumi Analytics</span>?</h2>
+                  <p>Book a free 30-minute session. No obligation, just a conversation about where your data could take you.</p>
+                  <button className="btn-primary" onClick={() => navigateTo('contact')}>Book a Demo</button>
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
 
             <div className="section-head">
               <span className="eyebrow"><i className="fas fa-toolbox"></i> Our stack</span>
@@ -492,14 +550,16 @@ function App() {
             </div>
             <div className="tools-grid">
               {toolsData.map((tool, i) => (
-                <div key={i} className="tool-item">
-                  {tool.custom ? (
-                    <div className="custom-icon" style={{ background: tool.color }}>{tool.label}</div>
-                  ) : (
-                    <i className={`fas ${tool.icon} tool-icon`} style={{ color: tool.color }}></i>
-                  )}
-                  <span className="tool-name">{tool.name}</span>
-                </div>
+                <AnimatedSection key={i} delay={50 + i * 30} isActive={activePage === 'home'}>
+                  <div className="tool-item">
+                    {tool.custom ? (
+                      <div className="custom-icon" style={{ background: tool.color }}>{tool.label}</div>
+                    ) : (
+                      <i className={`fas ${tool.icon} tool-icon`} style={{ color: tool.color }}></i>
+                    )}
+                    <span className="tool-name">{tool.name}</span>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
           </section>
@@ -517,14 +577,16 @@ function App() {
             </div>
             <div className="expertise-grid-detailed">
               {servicesDetailed.map((service, i) => (
-                <div key={i} className="expertise-card-detailed">
-                  <img src={service.img} alt={service.title} className="expertise-img" loading="lazy" />
-                  <div className="card-header">
-                    <div className="card-icon" style={{ background: service.bg }}><i className={`fas ${service.icon}`}></i></div>
-                    <h3>{service.title}</h3>
+                <AnimatedSection key={i} delay={100 + i * 50} isActive={activePage === 'services'}>
+                  <div className="expertise-card-detailed">
+                    <img src={service.img} alt={service.title} className="expertise-img" loading="lazy" />
+                    <div className="card-header">
+                      <div className="card-icon" style={{ background: service.bg }}><i className={`fas ${service.icon}`}></i></div>
+                      <h3>{service.title}</h3>
+                    </div>
+                    <ul>{service.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
                   </div>
-                  <ul>{service.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
           </section>
@@ -538,20 +600,23 @@ function App() {
               <h2 className="section-title">Let's Talk About <span className="highlight">Your Data</span></h2>
               <p className="section-sub" style={{ margin: '0 auto' }}>Tell us what you're working on and we'll get back to you within 24 hours.</p>
             </div>
-            <div className="contact-grid">
-              <div className="contact-info">
-                <h3>Contact <span style={{ color: 'var(--accent)' }}>Azumi Analytics</span></h3>
-                <div className="info-item"><div className="card-icon"><i className="fas fa-phone-alt"></i></div><div><strong>Call Us</strong>+254 735 988 699</div></div>
-                <div className="info-item"><div className="card-icon"><i className="fas fa-envelope"></i></div><div><strong>Email Us</strong>info@azumianalytics.co.ke</div></div>
-                <div className="info-item"><div className="card-icon"><i className="fas fa-map-marker-alt"></i></div><div><strong>Visit Us</strong>Westlands, Nairobi, Kenya</div></div>
+            <AnimatedSection delay={0} isActive={activePage === 'contact'}>
+              <div className="contact-grid">
+                <div className="contact-info">
+                  <h3>Contact <span style={{ color: 'var(--accent)' }}>Azumi Analytics</span></h3>
+                  <div className="info-item"><div className="card-icon"><i className="fas fa-phone-alt"></i></div><div><strong>Call Us</strong>+254 718704473</div></div>
+                  <div className="info-item"><div className="card-icon"><i className="fas fa-envelope"></i></div><div><strong>Email Us</strong>info@azumianalytics.co.ke</div></div>
+                  <div className="info-item"><div className="card-icon"><i className="fas fa-map-marker-alt"></i></div><div><strong>Visit Us</strong>Westlands, Nairobi, Kenya</div></div>
+                </div>
+                <SmartContactForm />
               </div>
-              <SmartContactForm />
-            </div>
+            </AnimatedSection>
           </section>
         )}
 
         {/* Footer */}
         <footer className="footer">
+          <FooterParticles />
           <div className="footer-inner">
             <div className="footer-grid">
               <div className="footer-brand">
@@ -561,7 +626,7 @@ function App() {
               </div>
               <div className="footer-col"><h4>Quick Links</h4><ul><li><a onClick={() => navigateTo('home')}>Home</a></li><li><a onClick={() => navigateTo('services')}>Our Expertise</a></li><li><a onClick={() => navigateTo('contact')}>Contact Us</a></li></ul></div>
               <div className="footer-col"><h4>Company</h4><ul><li><a>Careers</a></li><li><a>Privacy Policy</a></li><li><a>Terms of Service</a></li></ul></div>
-              <div className="footer-col"><h4>Contact</h4><div className="footer-contact-item"><i className="fas fa-phone-alt"></i><span>+254 735 988 699</span></div><div className="footer-contact-item"><i className="fas fa-envelope"></i><span>info@azumianalytics.co.ke</span></div><div className="footer-contact-item"><i className="fas fa-map-marker-alt"></i><span>Westlands, Nairobi</span></div></div>
+              <div className="footer-col"><h4>Contact</h4><div className="footer-contact-item"><i className="fas fa-phone-alt"></i><span>+254 718704473</span></div><div className="footer-contact-item"><i className="fas fa-envelope"></i><span>info@azumianalytics.co.ke</span></div><div className="footer-contact-item"><i className="fas fa-map-marker-alt"></i><span>Westlands, Nairobi</span></div></div>
             </div>
             <div className="footer-bottom">
               <p>&copy; 2026 <span className="azumi">Azumi Analytics</span>. All Rights Reserved.</p>
