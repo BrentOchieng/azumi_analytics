@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azumi Analytics — Data & AI Consultancy </title>
+<meta name="description" content="Azumi Analytics is a data consultancy firm helping businesses turn raw data into confident decisions through analytics, data engineering, AI/ML, NLP and automation.">
+<meta property="og:title" content="Azumi Analytics — Data & AI Consultancy">
+<meta property="og:description" content="Actionable data and AI solutions for businesses across Africa and beyond.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://azumianalytics.co.ke">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://azumianalytics.co.ke">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23175D82'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23F2994A'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23175D82'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23F2994A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    --primary:#175D82;
+    --primary-deep:#0E3E58;
+    --primary-tint:#E8F1F6;
+    --primary-light:#2A7FA8;
+    --accent:#F2994A;
+    --accent-tint:#FDECD8;
+    --accent-light:#F5B87A;
+    --bg:#FFFFFF;
+    --bg-soft:#F0F5F9;
+    --bg-gradient-start:#E8F1F6;
+    --bg-gradient-end:#D4E6F0;
+    --text:#1A2A3A;
+    --text-soft:#4A5A6A;
+    --border:#D0DDE8;
+    --font-head:'Poppins', sans-serif;
+    --font-body:'Inter', system-ui, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg);
+    background-image: 
+      radial-gradient(ellipse at 10% 20%, rgba(23, 93, 130, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at 90% 80%, rgba(242, 153, 74, 0.04) 0%, transparent 50%);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.65;
+    min-height:100vh;
+  }
+  .container{max-width:1220px; margin:0 auto; padding:0 2rem;}
+  img{max-width:100%; display:block;}
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:4px;}
+
+  /* Skip link */
+  .skip-link{position:absolute;left:-9999px;top:0;padding:1rem 1.5rem;background:var(--primary);color:#fff;z-index:9999;font-weight:600;border-radius:0 0 8px 0;}
+  .skip-link:focus{left:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ===== NAV ===== */
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.3rem 0;
+    flex-wrap:wrap;
+    gap:1rem;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(23, 93, 130, 0.08);
+    box-shadow: 0 4px 30px rgba(23, 93, 130, 0.06);
+  }
+  .logo-container{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+  }
+  .logo-img{height:52px; width:auto; max-width:200px; object-fit:contain;}
+  .logo-text{
+    font-family:var(--font-head);
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--primary-deep);
+    letter-spacing:-0.02em;
+    border-left:2px solid var(--accent);
+    padding-left:1rem;
+  }
+  .logo-text span{color:var(--accent);}
+  .logo-text .small{
+    font-size:0.75rem;
+    font-weight:500;
+    color:var(--text-soft);
+    display:block;
+    letter-spacing:0.03em;
+    margin-top:0.05rem;
+  }
+  .nav-links{display:flex;align-items:center;gap:2.2rem;flex-wrap:wrap;}
+  .nav-links a{text-decoration:none;font-weight:600;font-size:0.98rem;color:var(--text-soft);padding-bottom:4px;border-bottom:2px solid transparent;transition:0.2s;}
+  .nav-links a:hover, .nav-links a[aria-current="page"]{color:var(--primary);border-bottom-color:var(--accent);}
+  .nav-cta{background:var(--accent);color:#fff !important;padding:0.7rem 1.5rem;border-radius:50px;border-bottom:none !important;font-weight:600 !important;transition:0.2s;}
+  .nav-cta:hover{background:var(--primary);color:#fff !important;transform:translateY(-2px);}
+
+  /* Breadcrumb */
+  .breadcrumb{font-size:0.85rem;color:var(--text-soft);padding:0.5rem 0 1.5rem;}
+  .breadcrumb span{color:var(--primary);font-weight:600;}
+
+  /* ===== PAGES ===== */
+  .page-section{display:none;padding:1rem 0;}
+  .page-section.active{display:block;animation:fadeIn 0.4s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);}}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent-tint);color:#B5651D;font-weight:600;font-size:0.85rem;padding:0.4rem 1rem;border-radius:50px;margin-bottom:1.2rem;}
+  .eyebrow i{font-size:0.8rem;}
+  .section-title{font-family:var(--font-head);font-weight:700;font-size:2.2rem;color:var(--primary-deep);margin-bottom:0.7rem;line-height:1.25;}
+  .section-title .highlight{color:var(--accent);}
+  .section-sub{color:var(--text-soft);max-width:640px;font-size:1.05rem;}
+  .section-head{text-align:center;margin:0 auto 2.5rem;max-width:700px;}
+  .section-head .eyebrow{display:inline-flex;}
+
+  /* ===== HERO ===== */
+  .hero{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:3rem;
+    align-items:center;
+    padding:2rem 0 2rem;
+    background: linear-gradient(135deg, rgba(23,93,130,0.03) 0%, rgba(242,153,74,0.03) 100%);
+    border-radius: 32px;
+    padding: 3rem 2rem;
+    margin: 1rem 0 2rem;
+  }
+  .hero h1{
+    font-family:var(--font-head);
+    font-weight:700;
+    font-size:2.9rem;
+    line-height:1.18;
+    color:var(--primary-deep);
+    letter-spacing:-0.01em;
+  }
+  .hero h1 .company-name{color:var(--accent);position:relative;}
+  .hero h1 .company-name::after{
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:100%;
+    height:3px;
+    background:var(--accent);
+    border-radius:4px;
+    opacity:0.3;
+  }
+  .hero h1 span{color:var(--accent);}
+  .hero p{font-size:1.1rem;color:var(--text-soft);margin:1.4rem 0 2rem;max-width:520px;}
+  .hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn-primary{background:var(--primary);color:#fff;border:none;padding:0.95rem 2.2rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;transition:0.2s;box-shadow:0 10px 24px rgba(23,93,130,0.22);}
+  .btn-primary:hover{background:var(--primary-deep);transform:translateY(-2px);box-shadow:0 14px 30px rgba(23,93,130,0.3);}
+  .btn-primary:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
+  .btn-outline{background:rgba(255,255,255,0.8);backdrop-filter:blur(4px);color:var(--primary);border:2px solid var(--primary);padding:0.9rem 2.1rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;transition:0.2s;}
+  .btn-outline:hover{background:var(--primary-tint);transform:translateY(-2px);}
+
+  /* Hero Image Carousel - Updated for cleaner display */
+  .hero-visual{
+    position:relative;
+    height:420px;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(14,62,88,0.35);
+  }
+  .hero-slider{
+    position:relative;
+    width:100%;
+    height:100%;
+  }
+  .hero-slide{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+    transform:scale(1.05);
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .hero-slide.active{
+    opacity:1;
+    transform:scale(1);
+    z-index:2;
+  }
+  .hero-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .hero-slide .slide-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:1.5rem 1.5rem 1.2rem;
+    background:linear-gradient(transparent, rgba(14,62,88,0.85));
+    color:#fff;
+  }
+  .hero-slide .slide-overlay .slide-icon{
+    display:inline-block;
+    background:var(--accent);
+    padding:0.2rem 0.7rem;
+    border-radius:8px;
+    font-size:0.7rem;
+    font-weight:600;
+    margin-bottom:0.3rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .hero-slide .slide-overlay h4{
+    font-family:var(--font-head);
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:0.1rem;
+  }
+  .hero-slide .slide-overlay p{
+    font-size:0.85rem;
+    opacity:0.9;
+    margin:0;
+  }
+  .hero-slider-controls{
+    position:absolute;
+    bottom:1rem;
+    right:1.2rem;
+    z-index:10;
+    display:flex;
+    gap:0.5rem;
+  }
+  .hero-slider-controls button{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,0.6);
+    background:transparent;
+    cursor:pointer;
+    transition:0.3s;
+    padding:0;
+  }
+  .hero-slider-controls button.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    transform:scale(1.2);
+  }
+  .hero-slider-controls button:hover{
+    transform:scale(1.3);
+    border-color:#fff;
+  }
+
+  /* ===== NUMBERS ===== */
+  .numbers{
+    background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary) 100%);
+    border-radius:24px;
+    padding:3rem 2rem;
+    margin:4rem 0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.5rem;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .numbers::before{
+    content:'';
+    position:absolute;
+    top:-50%;
+    right:-20%;
+    width:300px;
+    height:300px;
+    background:radial-gradient(circle, rgba(242,153,74,0.1) 0%, transparent 70%);
+    border-radius:50%;
+  }
+  .numbers::after{
+    content:'';
+    position:absolute;
+    bottom:-30%;
+    left:-10%;
+    width:200px;
+    height:200px;
+    background:radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius:50%;
+  }
+  .number-item{position:relative;z-index:1;}
+  .number-item h3{font-family:var(--font-head);font-size:2.5rem;font-weight:700;color:#fff;}
+  .number-item p{color:#CFE3ED;font-size:0.95rem;margin-top:0.3rem;}
+
+  /* ===== EXPERTISE GRID (home) ===== */
+  .expertise-grid-home{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem;}
+  .expertise-card-home{
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(23,93,130,0.08);
+    border-radius:18px;
+    padding:1.8rem;
+    text-decoration:none;
+    color:inherit;
+    transition:0.3s;
+    cursor:pointer;
+  }
+  .expertise-card-home:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px -18px rgba(14,62,88,0.22);
+    border-color:rgba(242,153,74,0.3);
+    background:rgba(255,255,255,0.95);
+  }
+  .card-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;margin-bottom:1.1rem;flex-shrink:0;}
+  .expertise-card-home h4{font-family:var(--font-head);font-size:1.1rem;font-weight:600;color:var(--primary-deep);margin-bottom:0.5rem;}
+  .expertise-card-home p{color:var(--text-soft);font-size:0.94rem;}
+  .learn-more{display:inline-flex;align-items:center;gap:0.4rem;color:var(--primary);font-weight:600;font-size:0.9rem;margin-top:0.9rem;}
+
+  /* ===== WHY ===== */
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem;}
+  .why-item{
+    padding:1.8rem;
+    border-radius:18px;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(23,93,130,0.06);
+    transition:0.3s;
+  }
+  .why-item:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(23,93,130,0.08);
+    border-color:rgba(242,153,74,0.2);
+  }
+  .why-item .card-icon{background:var(--primary-tint);color:var(--primary);width:48px;height:48px;border-radius:12px;margin-bottom:1rem;}
+  .why-item h4{font-family:var(--font-head);font-size:1.05rem;font-weight:600;color:var(--primary-deep);margin-bottom:0.4rem;}
+  .why-item p{color:var(--text-soft);font-size:0.93rem;}
+
+  /* ===== CTA BAND ===== */
+  .cta-band{position:relative;border-radius:28px;overflow:hidden;margin:4.5rem 0;padding:4rem 2rem;text-align:center;}
+  .cta-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(14,62,88,0.93), rgba(23,93,130,0.85));z-index:1;}
+  .cta-band-content{position:relative;z-index:2;max-width:640px;margin:0 auto;}
+  .cta-band h2{font-family:var(--font-head);font-size:2rem;font-weight:700;color:#fff;margin-bottom:1rem;}
+  .cta-band h2 .azumi{color:var(--accent);}
+  .cta-band p{color:#DCEAF1;margin-bottom:2rem;font-size:1.05rem;}
+  .cta-band .btn-primary{background:var(--accent);box-shadow:0 10px 24px rgba(0,0,0,0.25);}
+  .cta-band .btn-primary:hover{background:#d97f34;}
+
+  /* ===== TOOLS ===== */
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:1rem;}
+  .tool-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.5rem;
+    padding:1.2rem 0.5rem;
+    border-radius:14px;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(23,93,130,0.06);
+    transition:0.3s;
+  }
+  .tool-item:hover{
+    background:rgba(255,255,255,0.95);
+    box-shadow:0 10px 24px rgba(14,62,88,0.1);
+    border-color:rgba(242,153,74,0.2);
+    transform:translateY(-2px);
+  }
+  .tool-item img{height:34px;width:auto;max-width:48px;object-fit:contain;}
+  .tool-item .custom-icon{height:34px;width:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-family:var(--font-head);font-size:0.85rem;}
+  .tool-item .tool-name{font-size:0.68rem;font-weight:600;color:var(--text-soft);text-align:center;}
+
+  /* ===== SERVICES PAGE ===== */
+  .expertise-intro{max-width:760px;margin:0 auto 3rem;text-align:center;color:var(--text-soft);font-size:1.08rem;}
+  .expertise-grid-detailed{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:1.8rem;
+  }
+  .expertise-card-detailed{
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(23,93,130,0.06);
+    border-radius:20px;
+    padding:2rem;
+    transition:0.3s;
+    overflow:hidden;
+  }
+  .expertise-card-detailed:hover{
+    box-shadow:0 20px 45px -20px rgba(14,62,88,0.2);
+    border-color:rgba(242,153,74,0.2);
+    transform:translateY(-4px);
+  }
+  .expertise-card-detailed .expertise-img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:1.2rem;
+    background:#E8F1F6;
+  }
+  .card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+  .card-header .card-icon{margin-bottom:0;}
+  .card-header h3{font-family:var(--font-head);font-size:1.25rem;font-weight:600;color:var(--primary-deep);}
+  .expertise-card-detailed ul{list-style:none;}
+  .expertise-card-detailed ul li{padding:0.5rem 0 0.5rem 1.6rem;position:relative;color:#374957;font-size:0.95rem;border-bottom:1px solid rgba(23,93,130,0.06);}
+  .expertise-card-detailed ul li:last-child{border-bottom:none;}
+  .expertise-card-detailed ul li::before{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;left:0;color:var(--accent);font-size:0.8rem;top:0.65rem;}
+
+  /* ===== CONTACT ===== */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3rem;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(8px);
+    padding:3rem;
+    border-radius:24px;
+    border:1px solid rgba(23,93,130,0.06);
+  }
+  .contact-info h3{font-family:var(--font-head);font-size:1.5rem;color:var(--primary-deep);margin-bottom:1.6rem;}
+  .contact-info .info-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+  .contact-info .info-item .card-icon{margin-bottom:0;background:var(--primary);width:44px;height:44px;border-radius:12px;}
+  .contact-info .info-item strong{display:block;font-size:0.85rem;color:var(--text-soft);font-weight:600;}
+  .contact-form label{display:block;font-weight:600;color:var(--primary-deep);margin:1rem 0 0.4rem;font-size:0.92rem;}
+  .contact-form input, .contact-form textarea{width:100%;padding:0.85rem 1.1rem;border:1px solid rgba(23,93,130,0.12);border-radius:12px;font-size:1rem;font-family:var(--font-body);background:rgba(255,255,255,0.8);transition:0.2s;}
+  .contact-form input:focus, .contact-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint);}
+  .contact-form .btn-primary{margin-top:1.4rem;width:100%;border-radius:50px;}
+  .form-success{background:#EAF7EF;border:1px solid #66C28A;border-radius:16px;padding:1.6rem;color:#1E5F3A;font-size:0.98rem;display:none;}
+  .form-success.show{display:block;}
+  .contact-form.hidden{display:none;}
+
+  /* ===== COOKIE CONSENT ===== */
+  #cookieConsent{position:fixed;bottom:0;left:0;right:0;background:var(--primary-deep);color:#fff;padding:1rem 2rem;display:none;z-index:9999;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;border-top:3px solid var(--accent);}
+  #cookieConsent p{font-size:0.9rem;flex:1;min-width:200px;}
+  #cookieConsent a{color:var(--accent);text-decoration:underline;}
+  #cookieConsent .cookie-actions{display:flex;gap:0.8rem;flex-wrap:wrap;}
+  #cookieConsent .cookie-accept{background:var(--accent);border:none;padding:0.5rem 1.5rem;border-radius:50px;color:#fff;font-weight:600;cursor:pointer;transition:0.2s;}
+  #cookieConsent .cookie-accept:hover{background:#d97f34;}
+  #cookieConsent .cookie-dismiss{background:transparent;border:1px solid rgba(255,255,255,0.3);padding:0.5rem 1.5rem;border-radius:50px;color:#fff;cursor:pointer;transition:0.2s;}
+  #cookieConsent .cookie-dismiss:hover{background:rgba(255,255,255,0.1);}
+
+  /* ===== FOOTER ===== */
+  .footer{
+    margin-top:4rem;
+    padding:3.5rem 2rem 2rem;
+    background: linear-gradient(135deg, var(--primary-deep) 0%, #0A2A3D 100%);
+    color:#fff;
+    border-radius:32px 32px 0 0;
+    border-top:3px solid var(--accent);
+    width:100vw;
+    margin-left:calc(-50vw + 50%);
+    padding-left:calc(50vw - 50% + 2rem);
+    padding-right:calc(50vw - 50% + 2rem);
+  }
+  .footer-inner{max-width:1220px;margin:0 auto;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .footer-brand .logo-img{height:42px;margin-bottom:0.9rem;filter:brightness(0) invert(1);}
+  .footer-brand .brand-name{font-family:var(--font-head);font-weight:700;font-size:1.3rem;color:#fff;display:block;margin-bottom:0.5rem;}
+  .footer-brand .brand-name span{color:var(--accent);}
+  .footer-brand p{color:#A9C2CF;font-size:0.93rem;max-width:280px;}
+  .footer-col h4{font-family:var(--font-head);font-size:0.95rem;color:#fff;margin-bottom:1.2rem;position:relative;padding-bottom:0.5rem;}
+  .footer-col h4::after{content:'';position:absolute;bottom:0;left:0;width:30px;height:2px;background:var(--accent);border-radius:2px;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:0.6rem;}
+  .footer-col ul li a{text-decoration:none;color:#A9C2CF;font-size:0.93rem;transition:0.2s;}
+  .footer-col ul li a:hover{color:var(--accent);padding-left:4px;}
+  .footer-contact-item{display:flex;align-items:center;gap:0.7rem;margin-bottom:0.8rem;color:#A9C2CF;font-size:0.93rem;}
+  .footer-contact-item i{color:var(--accent);width:1.1rem;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;flex-wrap:wrap;gap:1rem;}
+  .footer-bottom p{color:#7FA1B2;font-size:0.85rem;}
+  .footer-bottom p .azumi{color:var(--accent);font-weight:600;}
+  .footer-social a{color:#A9C2CF;margin-left:1.1rem;font-size:1.05rem;transition:0.2s;display:inline-block;}
+  .footer-social a:hover{color:var(--accent);transform:translateY(-2px);}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;text-align:left;padding:2rem 1.5rem;}
+    .hero-visual{order:-1;height:320px;}
+    .numbers{grid-template-columns:1fr 1fr;}
+    .navbar{flex-direction:column;align-items:stretch;padding:1rem 1.5rem;}
+    .logo-container{justify-content:center;}
+    .nav-links{justify-content:center;}
+    .footer{padding-left:1.5rem;padding-right:1.5rem;}
+  }
+  @media (max-width:800px){
+    .contact-grid{grid-template-columns:1fr;padding:2rem;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+  }
+  @media (max-width:500px){
+    .container{padding:0 1.2rem;}
+    .hero h1{font-size:2.1rem;}
+    .hero-visual{height:260px;}
+    .numbers{grid-template-columns:1fr 1fr;padding:2rem 1.2rem;}
+    .footer-grid{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;text-align:center;}
+    .footer-social a{margin:0 0.55rem;}
+    .cta-band{padding:3rem 1.2rem;}
+    #cookieConsent{padding:1rem;}
+    .navbar{padding:0.8rem 1rem;}
+    .logo-text{font-size:1.2rem;padding-left:0.6rem;}
+    .logo-text .small{font-size:0.65rem;}
+    .nav-links{gap:1rem;}
+    .nav-links a{font-size:0.85rem;}
+    .logo-img{height:40px;}
+    .footer{padding-left:1rem;padding-right:1rem;}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Azumi Analytics",
+  "description": "Nairobi-based data consultancy helping businesses turn raw data into confident decisions through analytics, data engineering, AI/ML, NLP and automation.",
+  "url": "https://azumianalytics.co.ke",
+  "telephone": "+254735988699",
+  "email": "info@azumianalytics.co.ke",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Nairobi",
+    "addressCountry": "KE"
+  },
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "08:00",
+    "closes": "17:00"
+  }
+}
+</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="container" id="main-content">
+
+  <!-- NAV -->
+  <nav class="navbar" role="navigation" aria-label="Primary navigation">
+    <div class="logo-container">
+      <img src="https://i.postimg.cc/T3pMK5bj/azumi-analytics.jpg" alt="Azumi Analytics logo - data consultancy in Nairobi" class="logo-img" width="200" height="52">
+      <div class="logo-text">
+        Azumi<span>Analytics</span>
+        <span class="small">Data &amp; AI Consultancy</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#" data-page="home" aria-current="page">Home</a>
+      <a href="#" data-page="services">Our Expertise</a>
+      <a href="#" data-page="contact">Contact Us</a>
+      <a href="#" class="nav-cta" data-page="contact">Book a Demo</a>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" aria-label="Breadcrumb navigation">
+    <span>Home</span>
+  </div>
+
+  <!-- ========== HOME ========== -->
+  <section id="page-home" class="page-section active" aria-label="Home page">
+    <div class="hero">
+      <div>
+        <span class="eyebrow"><i class="fas fa-map-pin" aria-hidden="true"></i> Nairobi, Kenya</span>
+        <h1>Turn your data into decisions people <span>actually trust</span> with <span class="company-name">Azumi Analytics</span></h1>
+        <p>Azumi Analytics is a Nairobi-based data consultancy firm helping businesses move past guesswork. We combine sharp analytics with practical AI, so every decision is backed by evidence, not intuition.</p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="navigateTo('services')" aria-label="Explore our data and AI expertise">Explore Our Expertise</button>
+          <button class="btn-outline" onclick="navigateTo('contact')" aria-label="Book a free consultation">Book a Demo</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-slider" id="heroSlider" role="img" aria-label="Data analytics, AI, and consulting services slideshow">
+          <!-- Slide 1: Advisory & Strategic - Black professionals in data analytics room -->
+          <div class="hero-slide active" data-index="0">
+            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=600&fit=crop&auto=format&q=80" alt="Black data analysts working in a modern data analytics room" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-handshake" aria-hidden="true"></i> Advisory</span>
+              <h4>Strategic Data Consulting</h4>
+              <p>Clear-eyed strategy and roadmap for your business</p>
+            </div>
+          </div>
+          <!-- Slide 2: Analytics & Visualization -->
+          <div class="hero-slide" data-index="1">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format&q=80" alt="Dashboard and data visualization on a computer screen" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-chart-line" aria-hidden="true"></i> Analytics</span>
+              <h4>Interactive Dashboards &amp; BI</h4>
+              <p>Real-time insights that answer real questions</p>
+            </div>
+          </div>
+          <!-- Slide 3: Data Collection -->
+          <div class="hero-slide" data-index="2">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop&auto=format&q=80" alt="Field researcher collecting data with a tablet" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-clipboard-list" aria-hidden="true"></i> Collection</span>
+              <h4>Field-Ready Data Collection</h4>
+              <p>Real-time capture built for local conditions</p>
+            </div>
+          </div>
+          <!-- Slide 4: Data Engineering -->
+          <div class="hero-slide" data-index="3">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop&auto=format&q=80" alt="Data servers and cloud infrastructure" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-database" aria-hidden="true"></i> Engineering</span>
+              <h4>Scalable Data Pipelines</h4>
+              <p>Infrastructure that grows with your ambitions</p>
+            </div>
+          </div>
+          <!-- Slide 5: Data Quality -->
+          <div class="hero-slide" data-index="4">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&auto=format&q=80" alt="Data quality dashboard showing clean data" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-check-circle" aria-hidden="true"></i> Quality</span>
+              <h4>Trustworthy Data Management</h4>
+              <p>Clean, reliable data for confident decisions</p>
+            </div>
+          </div>
+          <!-- Slide 6: Training & Enablement - Black professionals in training -->
+          <div class="hero-slide" data-index="5">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&auto=format&q=80" alt="Black professionals in a data analytics training session" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Training</span>
+              <h4>Data Literacy &amp; Enablement</h4>
+              <p>Building a truly data-driven culture</p>
+            </div>
+          </div>
+          <!-- Slide 7: AI & Machine Learning - Updated to ML concept -->
+          <div class="hero-slide" data-index="6">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format&q=80" alt="Machine learning and AI data visualization on screens" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-robot" aria-hidden="true"></i> AI/ML</span>
+              <h4>Practical Artificial Intelligence</h4>
+              <p>Predictive models that do the thinking for you</p>
+            </div>
+          </div>
+          <!-- Slide 8: Natural Language Processing -->
+          <div class="hero-slide" data-index="7">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop&auto=format&q=80" alt="Natural language processing and text analysis" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-comment-dots" aria-hidden="true"></i> NLP</span>
+              <h4>Natural Language Understanding</h4>
+              <p>Uncover what customers are really saying</p>
+            </div>
+          </div>
+          <!-- Slide 9: Intelligent Automation -->
+          <div class="hero-slide" data-index="8">
+            <img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&h=600&fit=crop&auto=format&q=80" alt="Automation and workflow optimization" loading="lazy" decoding="async">
+            <div class="slide-overlay">
+              <span class="slide-icon"><i class="fas fa-cogs" aria-hidden="true"></i> Automation</span>
+              <h4>Intelligent Process Automation</h4>
+              <p>Hand off repetitive work to focus on what matters</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slider-controls" role="tablist" aria-label="Image slider controls">
+          <button class="active" data-index="0" role="tab" aria-label="Show advisory image" aria-selected="true"></button>
+          <button data-index="1" role="tab" aria-label="Show analytics image" aria-selected="false"></button>
+          <button data-index="2" role="tab" aria-label="Show data collection image" aria-selected="false"></button>
+          <button data-index="3" role="tab" aria-label="Show data engineering image" aria-selected="false"></button>
+          <button data-index="4" role="tab" aria-label="Show data quality image" aria-selected="false"></button>
+          <button data-index="5" role="tab" aria-label="Show training image" aria-selected="false"></button>
+          <button data-index="6" role="tab" aria-label="Show AI/ML image" aria-selected="false"></button>
+          <button data-index="7" role="tab" aria-label="Show NLP image" aria-selected="false"></button>
+          <button data-index="8" role="tab" aria-label="Show automation image" aria-selected="false"></button>
+        </div>
+        <!-- Removed the distracting hero-chip container -->
+      </div>
+    </div>
+
+    <div class="numbers" id="numbersBand" aria-label="Key performance indicators">
+      <div class="number-item"><h3 data-target="5">0</h3><p>Years Team Experience</p></div>
+      <div class="number-item"><h3 data-target="60" data-suffix="+">0</h3><p>Projects Delivered</p></div>
+      <div class="number-item"><h3 data-target="20" data-suffix="+">0</h3><p>Tools in Our Stack</p></div>
+      <div class="number-item"><h3 data-target="15" data-suffix="+">0</h3><p>Client Engagements</p></div>
+    </div>
+
+    <div class="section-head">
+      <span class="eyebrow"><i class="fas fa-layer-group" aria-hidden="true"></i> What we do</span>
+      <h2 class="section-title">Our <span class="highlight">Expertise</span></h2>
+      <p class="section-sub" style="margin:0 auto;">End-to-end data and AI services from strategy to advanced intelligence tailored on how your business actually runs.</p>
+    </div>
+    <div class="expertise-grid-home">
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about advisory and strategic services">
+        <div class="card-icon" style="background:#5B6B78;" aria-hidden="true"><i class="fas fa-handshake"></i></div>
+        <h4>Advisory &amp; Strategic</h4>
+        <p>A clear-eyed data strategy and roadmap, built around where your business wants to go.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about analytics and visualization services">
+        <div class="card-icon" style="background:var(--accent);" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+        <h4>Analytics &amp; Visualization</h4>
+        <p>Dashboards and reports people actually open, because they answer real questions.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about data collection services">
+        <div class="card-icon" style="background:#2E9E8B;" aria-hidden="true"><i class="fas fa-clipboard-list"></i></div>
+        <h4>Data Collection</h4>
+        <p>Field-ready survey design and real-time data capture, built for local conditions.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about data engineering services">
+        <div class="card-icon" style="background:var(--primary);" aria-hidden="true"><i class="fas fa-database"></i></div>
+        <h4>Data Engineering</h4>
+        <p>Pipelines and warehouses that hold up as your data and ambitions grow.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about data quality management services">
+        <div class="card-icon" style="background:#C1443D;" aria-hidden="true"><i class="fas fa-check-circle"></i></div>
+        <h4>Data Quality Management</h4>
+        <p>Clean, trustworthy data, so every downstream decision starts on solid ground.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about training and enablement services">
+        <div class="card-icon" style="background:#8A6FBF;" aria-hidden="true"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h4>Training &amp; Enablement</h4>
+        <p>We teach your team to fish data literacy that sticks after we leave the room.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about AI and machine learning services">
+        <div class="card-icon" style="background:var(--accent);" aria-hidden="true"><i class="fas fa-robot"></i></div>
+        <h4>AI &amp; Machine Learning</h4>
+        <p>Predictive models and automation that quietly do the repetitive thinking for you.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about natural language processing services">
+        <div class="card-icon" style="background:#2E9E8B;" aria-hidden="true"><i class="fas fa-comment-dots"></i></div>
+        <h4>Natural Language Processing</h4>
+        <p>Understand what customers are really saying, across calls, chats and reviews.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+      <a href="#" class="expertise-card-home" onclick="navigateTo('services'); return false;" aria-label="Learn about intelligent automation services">
+        <div class="card-icon" style="background:#C1443D;" aria-hidden="true"><i class="fas fa-cogs"></i></div>
+        <h4>Intelligent Automation</h4>
+        <p>Hand off the repetitive work, so your team can focus on what needs a human.</p>
+        <span class="learn-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+    </div>
+
+    <div class="section-head" style="margin-top:5rem;">
+      <span class="eyebrow"><i class="fas fa-star" aria-hidden="true"></i> Why Azumi</span>
+      <h2 class="section-title">Built by people who've done the <span class="highlight">fieldwork</span></h2>
+      <p class="section-sub" style="margin:0 auto;">We've sat through the slow surveys and the messy spreadsheets — that's exactly why we build it better.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-users"></i></div><h4>Expert-Led Team</h4><p>Skilled data professionals across analytics, engineering and business strategy.</p></div>
+      <div class="why-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-sliders-h"></i></div><h4>Customized Solutions</h4><p>Services shaped around your business, not a one-size-fits-all package.</p></div>
+      <div class="why-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-arrows-alt-h"></i></div><h4>Flexible Engagement</h4><p>Models that adapt to your scope, budget and timeline.</p></div>
+      <div class="why-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-brain"></i></div><h4>AI &amp; Innovation</h4><p>Practical AI woven into every solution, not bolted on for a pitch deck.</p></div>
+      <div class="why-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-lock"></i></div><h4>Ethical Practices</h4><p>Strict standards of data integrity, privacy and responsible AI.</p></div>
+      <div class="why-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-map-marked-alt"></i></div><h4>Local Context, Global Standard</h4><p>Comfortable with a paper field survey and a cloud data lake alike.</p></div>
+    </div>
+
+    <div class="cta-band">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&h=500&fit=crop&auto=format&q=80" alt="Diverse team collaborating in a modern office setting" loading="lazy" decoding="async">
+      <div class="cta-band-content">
+        <h2>Ready to see your data differently with <span class="azumi">Azumi Analytics</span>?</h2>
+        <p>Book a free 30-minute session with our team. No obligation, just a conversation about where your data could take you.</p>
+        <button class="btn-primary" onclick="navigateTo('contact')" aria-label="Book a free consultation">Book a Demo</button>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <span class="eyebrow"><i class="fas fa-toolbox" aria-hidden="true"></i> Our stack</span>
+      <h2 class="section-title">Tools of the <span class="highlight">Trade</span></h2>
+      <p class="section-sub" style="margin:0 auto;">Industry-standard platforms, plus the field-research tools our context calls for.</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="Microsoft SQL Server logo" loading="lazy" width="34" height="34"><span class="tool-name">MS SQL</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL logo" loading="lazy" width="34" height="34"><span class="tool-name">MySQL</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL logo" loading="lazy" width="34" height="34"><span class="tool-name">PostgreSQL</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud Platform logo" loading="lazy" width="34" height="34"><span class="tool-name">GCP</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker logo" loading="lazy" width="34" height="34"><span class="tool-name">Docker</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python logo" loading="lazy" width="34" height="34"><span class="tool-name">Python</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powerbi/powerbi-original.svg" alt="Power BI logo" loading="lazy" width="34" height="34"><span class="tool-name">Power BI</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tableau/tableau-original.svg" alt="Tableau logo" loading="lazy" width="34" height="34"><span class="tool-name">Tableau</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/excel/excel-original.svg" alt="Microsoft Excel logo" loading="lazy" width="34" height="34"><span class="tool-name">Excel</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg" alt="Apache Spark logo" loading="lazy" width="34" height="34"><span class="tool-name">Spark</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Microsoft Azure logo" loading="lazy" width="34" height="34"><span class="tool-name">Azure</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apacheairflow/apacheairflow-original.svg" alt="Apache Airflow logo" loading="lazy" width="34" height="34"><span class="tool-name">Airflow</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/looker/looker-original.svg" alt="Looker logo" loading="lazy" width="34" height="34"><span class="tool-name">Looker</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS logo" loading="lazy" width="34" height="34"><span class="tool-name">AWS</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter logo" loading="lazy" width="34" height="34"><span class="tool-name">Jupyter</span></div>
+      <div class="tool-item"><div class="custom-icon" style="background:#0a6b5e;" aria-hidden="true">K</div><span class="tool-name">KoboToolbox</span></div>
+      <div class="tool-item"><div class="custom-icon" style="background:#175D82;" aria-hidden="true">F</div><span class="tool-name">Fabric</span></div>
+      <div class="tool-item"><div class="custom-icon" style="background:#2c3e50;" aria-hidden="true">S</div><span class="tool-name">SurveyCTO</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="DuckDB logo" loading="lazy" width="34" height="34"><span class="tool-name">DuckDB</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R logo" loading="lazy" width="34" height="34"><span class="tool-name">R</span></div>
+      <div class="tool-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dbt/dbt-original.svg" alt="dbt logo" loading="lazy" width="34" height="34"><span class="tool-name">dbt</span></div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="page-services" class="page-section" aria-label="Services page">
+    <div class="section-head">
+      <span class="eyebrow"><i class="fas fa-layer-group" aria-hidden="true"></i> Full breakdown</span>
+      <h2 class="section-title">Our <span class="highlight">Expertise</span>, In Detail</h2>
+      <p class="expertise-intro">Azumi Analytics delivers end-to-end data and AI solutions from strategy and engineering to advanced analytics, machine learning, NLP and intelligent automation. Every engagement blends technical rigor with an understanding of the context it's built for.</p>
+    </div>
+    <div class="expertise-grid-detailed">
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=400&fit=crop&auto=format&q=80" alt="Black data analysts in a data analytics room" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:#5B6B78;" aria-hidden="true"><i class="fas fa-handshake"></i></div><h3>Advisory &amp; Strategic</h3></div>
+        <ul><li>Data strategy &amp; roadmapping</li><li>Digital modernisation</li><li>Readiness &amp; maturity assessment</li><li>Blueprint architecture</li><li>Business analysis &amp; value mapping</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format&q=80" alt="Dashboard and data visualization on a computer screen" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:var(--accent);" aria-hidden="true"><i class="fas fa-chart-line"></i></div><h3>Analytics &amp; Visualization</h3></div>
+        <ul><li>BI strategy &amp; roadmapping</li><li>KPI design &amp; performance tracking</li><li>Predictive &amp; diagnostic analytics</li><li>Interactive dashboards &amp; reporting</li><li>Infographic-based data storytelling</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&auto=format&q=80" alt="Field researcher collecting data with a tablet" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:#2E9E8B;" aria-hidden="true"><i class="fas fa-clipboard-list"></i></div><h3>Data Collection</h3></div>
+        <ul><li>Survey design &amp; instrumentation</li><li>Multi-source data integration</li><li>Real-time data ingestion</li><li>IoT &amp; sensor data collection</li><li>Data validation &amp; enrichment</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop&auto=format&q=80" alt="Data servers and cloud infrastructure" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:var(--primary);" aria-hidden="true"><i class="fas fa-database"></i></div><h3>Data Engineering</h3></div>
+        <ul><li>Data architecture &amp; modeling</li><li>Data warehouse &amp; lake design</li><li>ETL/ELT pipeline development</li><li>Cloud infrastructure (AWS, Azure, GCP)</li><li>Real-time &amp; batch processing</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&auto=format&q=80" alt="Data quality dashboard showing clean data" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:#C1443D;" aria-hidden="true"><i class="fas fa-check-circle"></i></div><h3>Data Quality Management</h3></div>
+        <ul><li>Data profiling &amp; auditing</li><li>Cleansing &amp; standardization</li><li>Master data management (MDM)</li><li>Validation automation</li><li>Quality monitoring dashboards</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&auto=format&q=80" alt="Black professionals in a data analytics training session" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:#8A6FBF;" aria-hidden="true"><i class="fas fa-chalkboard-teacher"></i></div><h3>Training &amp; Enablement</h3></div>
+        <ul><li>Data literacy programs</li><li>Analytics tools training</li><li>Custom workshops &amp; enablement</li><li>Executive data strategy coaching</li><li>Building a data-driven culture</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format&q=80" alt="Machine learning and AI data visualization on screens" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:var(--accent);" aria-hidden="true"><i class="fas fa-robot"></i></div><h3>AI &amp; Machine Learning</h3></div>
+        <ul><li>Predictive modeling &amp; forecasting</li><li>Computer vision &amp; image analysis</li><li>Anomaly &amp; fraud detection</li><li>Recommendation engines</li><li>Automated machine learning (AutoML)</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop&auto=format&q=80" alt="Natural language processing and text analysis" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:#2E9E8B;" aria-hidden="true"><i class="fas fa-comment-dots"></i></div><h3>Natural Language Processing</h3></div>
+        <ul><li>Text classification &amp; categorization</li><li>Sentiment &amp; emotion analysis</li><li>Named entity recognition (NER)</li><li>Chatbots &amp; conversational AI</li><li>Language translation &amp; summarization</li></ul>
+      </div>
+      <div class="expertise-card-detailed">
+        <img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=600&h=400&fit=crop&auto=format&q=80" alt="Automation and workflow optimization" class="expertise-img" loading="lazy">
+        <div class="card-header"><div class="card-icon" style="background:#C1443D;" aria-hidden="true"><i class="fas fa-cogs"></i></div><h3>Intelligent Automation</h3></div>
+        <ul><li>Robotic process automation (RPA)</li><li>Workflow &amp; business process automation</li><li>Process mining &amp; optimization</li><li>AI operations (AIOps)</li><li>Smart document &amp; content processing</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="page-contact" class="page-section" aria-label="Contact page">
+    <div class="section-head">
+      <span class="eyebrow"><i class="fas fa-comment-dots" aria-hidden="true"></i> Get in touch</span>
+      <h2 class="section-title">Let's Talk About <span class="highlight">Your Data</span></h2>
+      <p class="section-sub" style="margin:0 auto;">Tell us what you're working on and we'll get back to you within 24 hours.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact <span style="color:var(--accent);">Azumi Analytics</span></h3>
+        <div class="info-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-phone-alt"></i></div><div><strong>Call Us</strong>+254 735 988 699</div></div>
+        <div class="info-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div><div><strong>Email Us</strong>info@azumianalytics.co.ke</div></div>
+        <div class="info-item"><div class="card-icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div><div><strong>Visit Us</strong>The Address, Westlands, Nairobi, Kenya</div></div>
+      </div>
+      <div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Wanjiru" required aria-required="true" autocomplete="name">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required aria-required="true" autocomplete="email">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required aria-required="true"></textarea>
+          <button type="submit" class="btn-primary" id="contactSubmit">Send Message <i class="fas fa-paper-plane" style="margin-left:8px;" aria-hidden="true"></i></button>
+        </form>
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <strong>✓ Message received.</strong> Thanks for reaching out to Azumi Analytics — we'll get back to you within 24 hours.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://i.postimg.cc/T3pMK5bj/azumi-analytics.jpg" alt="Azumi Analytics - Data & AI Consultancy" class="logo-img" width="200" height="42">
+          <span class="brand-name">Azumi<span>Analytics</span></span>
+          <p>Empowering businesses with data intelligence, AI and automation built for Africa and beyond.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#" onclick="navigateTo('home'); return false;">Home</a></li>
+            <li><a href="#" onclick="navigateTo('services'); return false;">Our Expertise</a></li>
+            <li><a href="#" onclick="navigateTo('contact'); return false;">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#" aria-label="Careers at Azumi Analytics">Careers</a></li>
+            <li><a href="#" aria-label="Privacy Policy">Privacy Policy</a></li>
+            <li><a href="#" aria-label="Terms of Service">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><i class="fas fa-phone-alt" aria-hidden="true"></i><span>+254 735 988 699</span></div>
+          <div class="footer-contact-item"><i class="fas fa-envelope" aria-hidden="true"></i><span>info@azumianalytics.co.ke</span></div>
+          <div class="footer-contact-item"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Westlands, Nairobi, Kenya</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span class="azumi">Azumi Analytics</span>. All Rights Reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Azumi Analytics on LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Azumi Analytics on Twitter/X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Azumi Analytics on GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Azumi Analytics on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Cookie Consent -->
+<div id="cookieConsent" role="dialog" aria-label="Cookie consent">
+  <p>We use cookies to enhance your experience on <strong>Azumi Analytics</strong>. By continuing, you agree to our <a href="#" aria-label="Read our Privacy Policy">Privacy Policy</a>.</p>
+  <div class="cookie-actions">
+    <button class="cookie-accept" onclick="acceptCookies()">Accept</button>
+    <button class="cookie-dismiss" onclick="dismissCookie()">Dismiss</button>
+  </div>
+</div>
+
+<script>
+  // Navigation
+  function navigateTo(page){
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+      if(link.dataset.page === page){ link.setAttribute('aria-current','page'); }
+      else{ link.removeAttribute('aria-current'); }
+    });
+    // Update breadcrumb
+    const names = {home:'Home', services:'Our Expertise', contact:'Contact Us'};
+    const bc = document.querySelector('.breadcrumb span');
+    if(bc) bc.textContent = names[page] || 'Home';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+    link.addEventListener('click', function(e){ e.preventDefault(); navigateTo(this.dataset.page); });
+  });
+
+  // Hero Image Slider
+  (function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const controls = document.querySelectorAll('.hero-slider-controls button');
+    let currentIndex = 0;
+    let slideInterval;
+
+    function goToSlide(index) {
+      // Update slides
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      // Update controls
+      controls.forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+        btn.setAttribute('aria-selected', i === index);
+      });
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      const next = (currentIndex + 1) % slides.length;
+      goToSlide(next);
+    }
+
+    function startSlider() {
+      if (slideInterval) clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4500);
+    }
+
+    function stopSlider() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+      }
+    }
+
+    // Control button clicks
+    controls.forEach((btn) => {
+      btn.addEventListener('click', function() {
+        const index = parseInt(this.dataset.index);
+        goToSlide(index);
+        stopSlider();
+        startSlider(); // Restart interval after manual navigation
+      });
+    });
+
+    // Pause on hover
+    const slider = document.getElementById('heroSlider');
+    slider.addEventListener('mouseenter', stopSlider);
+    slider.addEventListener('mouseleave', startSlider);
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      stopSlider();
+    }, {passive: true});
+    slider.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          const next = (currentIndex + 1) % slides.length;
+          goToSlide(next);
+        } else {
+          const prev = (currentIndex - 1 + slides.length) % slides.length;
+          goToSlide(prev);
+        }
+      }
+      startSlider();
+    }, {passive: true});
+
+    // Start the slider
+    goToSlide(0);
+    startSlider();
+  })();
+
+  // Contact Form with loading state
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = document.getElementById('contactSubmit');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Sending...';
+    btn.disabled = true;
+    
+    // Simulate async operation
+    setTimeout(() => {
+      this.classList.add('hidden');
+      document.getElementById('formSuccess').classList.add('show');
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      // Reset form after success (optional)
+      this.reset();
+    }, 1500);
+  });
+
+  // Animated number counters
+  const numberEls = document.querySelectorAll('.number-item h3');
+  let numbersAnimated = false;
+  function animateNumbers(){
+    if(numbersAnimated) return;
+    numbersAnimated = true;
+    numberEls.forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      let current = 0;
+      const step = Math.max(target / 40, 0.5);
+      function tick(){
+        current = Math.min(current + step, target);
+        el.textContent = Math.round(current) + suffix;
+        if(current < target) requestAnimationFrame(tick);
+      }
+      tick();
+    });
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if(entry.isIntersecting) animateNumbers(); });
+  }, {threshold:0.4});
+  const numbersBand = document.getElementById('numbersBand');
+  if(numbersBand) observer.observe(numbersBand);
+
+  // Cookie Consent
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + "=" + value + ";path=/;expires=" + d.toUTCString();
+  }
+  function getCookie(name) {
+    const c = document.cookie.split('; ');
+    for(let i = 0; i < c.length; i++) {
+      if(c[i].startsWith(name + '=')) return c[i].split('=')[1];
+    }
+    return null;
+  }
+  function acceptCookies() {
+    setCookie('cookie_consent', 'accepted', 365);
+    document.getElementById('cookieConsent').style.display = 'none';
+  }
+  function dismissCookie() {
+    setCookie('cookie_consent', 'dismissed', 7);
+    document.getElementById('cookieConsent').style.display = 'none';
+  }
+  // Show cookie banner if no consent stored
+  window.addEventListener('DOMContentLoaded', function() {
+    if(!getCookie('cookie_consent')) {
+      document.getElementById('cookieConsent').style.display = 'flex';
+    }
+  });
+
+  // Keyboard accessibility for cards
+  document.querySelectorAll('.expertise-card-home').forEach(card => {
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('keydown', function(e) {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+</script>
+</body>
+</html>
