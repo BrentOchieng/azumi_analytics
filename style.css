@@ -1405,5 +1405,6 @@ img {
 
   .services-grid {
     gap: 2px;
+    grid-template-columns: 1fr;
   }
 }
