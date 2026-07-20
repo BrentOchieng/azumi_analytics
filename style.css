@@ -717,6 +717,17 @@ img {
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-width: 0;
+  width: 100%;
+}
+
+.why-item .idx,
+.why-item h4,
+.why-item p {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .why-item .idx {
