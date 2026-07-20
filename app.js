@@ -649,14 +649,21 @@ function App() {
 }
 
 // ====== DATA READOUT STRIP ======
+// Counts up only once the strip is actually scrolled into view, so on
+// mobile (where the hero fills the screen) the animation still plays
+// when the user reaches it, instead of having already finished off-screen.
 function HomeNumbers({ isActive }) {
-  const years = useCounter(5, isActive);
-  const projects = useCounter(60, isActive);
-  const tools = useCounter(20, isActive);
-  const engagements = useCounter(15, isActive);
+  const ref = useRef(null);
+  const isVisible = useInView(ref);
+  const shouldCount = isActive && isVisible;
+
+  const years = useCounter(5, shouldCount);
+  const projects = useCounter(60, shouldCount);
+  const tools = useCounter(20, shouldCount);
+  const engagements = useCounter(15, shouldCount);
 
   return (
-    <div className="numbers-wrapper">
+    <div className="numbers-wrapper" ref={ref}>
       <div className="numbers">
         <div className="number-item"><h3>{years}<span className="plus">+</span></h3><p>Years team experience</p></div>
         <div className="number-item"><h3>{projects}<span className="plus">+</span></h3><p>Projects delivered</p></div>
